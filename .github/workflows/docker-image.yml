@@ -23,5 +23,7 @@ jobs:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
       run: echo "${DOCKER_TOKEN}" | docker login -u ${DOCKER_USER} --password-stdin
-    #- name: Docker Push
-    #  run: docker push ${{secrets.DOCKER_USER}}/alpine-ssh-client
+    - name: Docker Push
+      run: docker push ${{secrets.DOCKER_USER}}/alpine-ssh-client:$(date +%s)
+    - name: Logout Docker
+      run: docker logout
