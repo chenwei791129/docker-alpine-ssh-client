@@ -18,8 +18,8 @@ jobs:
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Docker Login
       env: 
-        DOCKER_USER: ${{secret.DOCKER_USER}}
-        DOCKER_TOKEN: ${{secret.DOCKER_TOKEN}}
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
       run: docker login -u ${DOCKER_USER} -p ${DOCKER_TOKEN}
     #- name: Docker Push
-    #  run: docker push ${{secret.DOCKER_USER}}/alpine-ssh-client
+    #  run: docker push ${{secrets.DOCKER_USER}}/alpine-ssh-client
