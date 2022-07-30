@@ -13,16 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag alpine-ssh-client:$(date +%s)
-    - name: Show Images
-      run: docker images
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_TOKEN }}
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag alpine-ssh-client:$(date +%s)
+    - name: Show Images
+      run: docker images ${{secrets.DOCKER_USER}}/alpine-ssh-client:$(date +%s)
     #- name: Docker Login
     #  env: 
     #    DOCKER_USER: ${{secrets.DOCKER_USER}}
