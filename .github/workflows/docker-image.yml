@@ -24,7 +24,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        push: false
+        push: true
         load: true
         tags: ${{secrets.DOCKER_USER}}/alpine-ssh-client:latest
     #- name: Build the Docker image
@@ -36,5 +36,5 @@ jobs:
     #    DOCKER_USER: ${{secrets.DOCKER_USER}}
     #    DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
     #  run: echo "${DOCKER_TOKEN}" | docker login -u ${DOCKER_USER} --password-stdin
-    - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/alpine-ssh-client:$(date +%s)
+    #- name: Docker Push
+    #  run: docker push ${{secrets.DOCKER_USER}}/alpine-ssh-client:$(date +%s)
