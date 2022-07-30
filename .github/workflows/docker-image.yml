@@ -15,11 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag alpine-ssh-client:$(date +%s)
+    - name: Show Images
+      run: docker images
     - name: Docker Login
       env: 
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
-      run: docker login -u ${DOCKER_USER} -p ${DOCKER_TOKEN}
+      run: echo "${DOCKER_TOKEN}" | docker login -u ${DOCKER_USER} --password-stdin
     #- name: Docker Push
     #  run: docker push ${{secrets.DOCKER_USER}}/alpine-ssh-client
