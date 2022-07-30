@@ -24,8 +24,10 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        push: true
-        tags: ${{secrets.DOCKER_USER}}/alpine-ssh-client:$(date +%s)
+        push: false
+        pull: true
+        load: true
+        tags: ${{secrets.DOCKER_USER}}/alpine-ssh-client:latest
     #- name: Build the Docker image
     #  run: docker build . --file Dockerfile --tag alpine-ssh-client:$(date +%s)
     #- name: Show Images
