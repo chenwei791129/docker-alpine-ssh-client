@@ -20,7 +20,7 @@ jobs:
             ${{ secrets.DOCKER_USER }}/alpine-ssh-client
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=sha-,format=short
+            type=sha,prefix={{date 'YYYYMMDD'}}-,format=short
             type=raw,value=latest,enable={{is_default_branch}}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
