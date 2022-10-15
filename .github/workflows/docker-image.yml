@@ -22,6 +22,7 @@ jobs:
             type=semver,pattern={{raw}}
             type=sha,prefix={{date 'YYYYMMDD'}}-,format=short
             type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=alpine,enable={{is_default_branch}}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
