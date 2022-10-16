@@ -1,8 +1,8 @@
 ARG BASE_IMAGE=alpine
 FROM ${BASE_IMAGE}:3.16
 LABEL MAINTAINER=AwEi \
-      GITHUB="https://github.com/chenwei791129/docker-alpine-openssh-client" \
-      DOCKERHUB="https://hub.docker.com/r/awei/alpine-openssh-client"
+      GITHUB="https://github.com/chenwei791129/docker-alpine-ssh-client" \
+      DOCKERHUB="https://hub.docker.com/r/awei/alpine-ssh-client"
 
 RUN apk add openssh-client && \
     mkdir -p ~/.ssh && \
