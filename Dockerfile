@@ -1,4 +1,5 @@
-FROM alpine:3.16
+ARG BASE_IMAGE=alpine
+FROM ${BASE_IMAGE}:3.16
 LABEL MAINTAINER=AwEi \
       GITHUB="https://github.com/chenwei791129/docker-alpine-openssh-client" \
       DOCKERHUB="https://hub.docker.com/r/awei/alpine-openssh-client"
