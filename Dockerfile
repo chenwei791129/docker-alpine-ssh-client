@@ -1,5 +1,5 @@
 ARG BASE_IMAGE=alpine
-FROM ${BASE_IMAGE}:3.18.0
+FROM ${BASE_IMAGE}:3.18.2
 LABEL MAINTAINER=AwEi \
       GITHUB="https://github.com/chenwei791129/docker-alpine-ssh-client" \
       DOCKERHUB="https://hub.docker.com/r/awei/alpine-ssh-client"
