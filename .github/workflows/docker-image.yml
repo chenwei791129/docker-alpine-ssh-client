@@ -13,6 +13,8 @@ on:
 jobs:
   build-multiple-platform:
     runs-on: ubuntu-latest
+    env:
+      BASE_TAG: 3.22.1
     permissions:
       contents: read
       packages: write
@@ -28,9 +30,9 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/alpine-ssh-client
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix={{date 'YYYYMMDD'}}-,format=short
             type=raw,value=latest,enable={{is_default_branch}}
             type=raw,value=alpine,enable={{is_default_branch}}
+            type=raw,value=alpine-${{ env.BASE_TAG }},enable={{is_default_branch}}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         with:
@@ -56,6 +58,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            BASE_TAG=3.22.1
+            BASE_TAG=${{ env.BASE_TAG }}
           platforms: |
             linux/amd64,linux/arm64
