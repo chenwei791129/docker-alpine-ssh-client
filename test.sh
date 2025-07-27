@@ -20,3 +20,6 @@ if [ $? -ne 0 ]; then
     echo "Rsync command failed"
     exit 1
 fi
+
+echo "All tests passed successfully."
+exit 0
