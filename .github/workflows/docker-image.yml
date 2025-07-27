@@ -56,6 +56,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            BASE_IMAGE=alpine
+            BASE_TAG=3.22.1
           platforms: |
             linux/amd64,linux/arm64
