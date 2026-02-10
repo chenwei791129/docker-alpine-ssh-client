@@ -15,7 +15,7 @@ jobs:
   build-multiple-platform:
     runs-on: ubuntu-latest
     env:
-      BASE_TAG: 3.22.1
+      BASE_TAG: 3.23.3
     permissions:
       contents: read
       packages: write
