@@ -8,6 +8,15 @@ A lightweight Docker image based on Alpine Linux with OpenSSH client pre-install
 - 🔑 OpenSSH client pre-installed with `StrictHostKeyChecking` disabled
 - 🚀 Ready for CI/CD deployments
 
+## Image Variants
+
+| Tags | Dockerfile | Contents |
+|------|------------|----------|
+| `alpine`, `alpine-<version>`, `latest` | `Dockerfile` | `openssh-client`, `rsync`, `sshpass` |
+| `alpine-fat`, `alpine-<version>-fat`, `fat` | `Dockerfile.fat` | Everything above, plus `bash` and `jq` for deployment scripts |
+
+Prefer the slim image; use the `-fat` variant only when your job needs the extra tools and cannot install them at runtime.
+
 ## CI/CD Examples
 
 ### GitLab CI
@@ -26,6 +35,9 @@ deploy:
 
 ```bash
 docker buildx build --build-arg BASE_TAG=3.22.1 --platform linux/amd64 -t local/alpine-ssh-client .
+
+# fat variant
+docker buildx build --build-arg BASE_TAG=3.22.1 --platform linux/amd64 -f Dockerfile.fat -t local/alpine-ssh-client:fat .
 ```
 
 ## License

@@ -7,18 +7,24 @@ name: Docker Image CI
 # pull-rate and retention limits keep tightening, and this account is
 # standardising on ghcr.io.
 #
-# Trigger only when the Dockerfile or this workflow changes on main.
+# Trigger only when a Dockerfile or this workflow changes on main.
 on:
   push:
     branches:
       - 'main'
     paths:
       - 'Dockerfile'
+      - 'Dockerfile.fat'
       - '.github/workflows/docker-image.yml'
   workflow_dispatch:
 
+# Two variants, as in openresty/docker-openresty: the slim image from Dockerfile
+# and a fat image from Dockerfile.fat whose tags carry a -fat suffix.
+# The alpine base version is repeated in both jobs rather than held in a
+# job-level `env`, because the `env` context is not available to a reusable
+# workflow's `with:` block. Bump every occurrence together.
 jobs:
-  build-and-push-image:
+  build-slim:
     permissions:
       contents: read
       packages: write
@@ -30,13 +36,29 @@ jobs:
       enable-branch-tag: false
       enable-latest-tag: false
       enable-semver-tags: false
-      # The alpine base version is repeated below rather than held in a job-level
-      # `env`, because the `env` context is not available to a reusable
-      # workflow's `with:` block. Bump both occurrences together.
       additional-tags: |
         type=semver,pattern={{raw}}
         type=raw,value=latest,enable={{is_default_branch}}
         type=raw,value=alpine,enable={{is_default_branch}}
         type=raw,value=alpine-3.23.3,enable={{is_default_branch}}
+      build-args: |
+        BASE_TAG=3.23.3
+
+  build-fat:
+    permissions:
+      contents: read
+      packages: write
+    uses: chenwei791129/.github/.github/workflows/build-and-push-image.yml@main
+    with:
+      image-name: chenwei791129/alpine-ssh-client
+      file: Dockerfile.fat
+      enable-branch-tag: false
+      enable-latest-tag: false
+      enable-semver-tags: false
+      additional-tags: |
+        type=semver,pattern={{raw}},suffix=-fat
+        type=raw,value=fat,enable={{is_default_branch}}
+        type=raw,value=alpine-fat,enable={{is_default_branch}}
+        type=raw,value=alpine-3.23.3-fat,enable={{is_default_branch}}
       build-args: |
         BASE_TAG=3.23.3
