@@ -6,6 +6,7 @@ A lightweight Docker image based on Alpine Linux with OpenSSH client pre-install
 
 - 🐧 Based on Alpine Linux for minimal image size (~14MB)
 - 🔑 OpenSSH client pre-installed with `StrictHostKeyChecking` disabled
+- 🧰 `bash`, `jq`, `rsync`, and `sshpass` included for deployment scripts
 - 🚀 Ready for CI/CD deployments
 
 ## CI/CD Examples

@@ -22,8 +22,9 @@ detect_runtime() {
 
 run_test() {
   local tool="$1"
+  local version_flag="${2:--V}"
   if ! "${DOCKER}" run --platform "${PLATFORM}" -it --rm \
-    --entrypoint "${tool}" "${IMAGE}" -V; then
+    --entrypoint "${tool}" "${IMAGE}" "${version_flag}"; then
     err "${tool} command failed"
     exit 1
   fi
@@ -47,6 +48,8 @@ main() {
   run_test "ssh"
   run_test "rsync"
   run_test "sshpass"
+  run_test "bash" "--version"
+  run_test "jq" "--version"
 
   echo "All tests passed successfully."
 }
