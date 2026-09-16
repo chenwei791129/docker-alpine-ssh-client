@@ -1,5 +1,7 @@
 # Docker Alpine SSH Client
 
+[![Docker Image CI](https://github.com/chenwei791129/docker-alpine-ssh-client/actions/workflows/docker-image.yml/badge.svg)](https://github.com/chenwei791129/docker-alpine-ssh-client/actions/workflows/docker-image.yml)
+
 A lightweight Docker image based on Alpine Linux with OpenSSH client pre-installed, specifically designed for application deployment scenarios.
 
 ## Features
