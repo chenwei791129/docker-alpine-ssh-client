@@ -5,7 +5,7 @@
 readonly IMAGE="local/alpine-ssh-client:test"
 readonly FAT_IMAGE="local/alpine-ssh-client:test-fat"
 readonly PLATFORM="linux/amd64"
-readonly BASE_TAG="3.23.3"
+readonly BASE_TAG="3.24.2"
 
 err() {
   echo "[ERROR]: $*" >&2
@@ -51,7 +51,7 @@ run_test() {
   local image="$1"
   local tool="$2"
   local version_flag="${3:--V}"
-  if ! "${DOCKER}" run --platform "${PLATFORM}" -it --rm \
+  if ! "${DOCKER}" run --platform "${PLATFORM}" --rm \
     --entrypoint "${tool}" "${image}" "${version_flag}"; then
     err "${tool} command failed in ${image}"
     exit 1

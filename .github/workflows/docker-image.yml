@@ -7,8 +7,16 @@ name: Docker Image CI
 # pull-rate and retention limits keep tightening, and this account is
 # standardising on ghcr.io.
 #
-# Trigger only when a Dockerfile or this workflow changes on main.
+# Trigger on pull requests for build verification (the shared workflow does not push
+# for pull_request events), as well as main-branch image changes.
 on:
+  pull_request:
+    branches:
+      - 'main'
+    paths:
+      - 'Dockerfile'
+      - 'Dockerfile.fat'
+      - '.github/workflows/docker-image.yml'
   push:
     branches:
       - 'main'
@@ -40,9 +48,9 @@ jobs:
         type=semver,pattern={{raw}}
         type=raw,value=latest,enable={{is_default_branch}}
         type=raw,value=alpine,enable={{is_default_branch}}
-        type=raw,value=alpine-3.23.3,enable={{is_default_branch}}
+        type=raw,value=alpine-3.24.2,enable={{is_default_branch}}
       build-args: |
-        BASE_TAG=3.23.3
+        BASE_TAG=3.24.2
 
   build-fat:
     permissions:
@@ -59,6 +67,6 @@ jobs:
         type=semver,pattern={{raw}},suffix=-fat
         type=raw,value=fat,enable={{is_default_branch}}
         type=raw,value=alpine-fat,enable={{is_default_branch}}
-        type=raw,value=alpine-3.23.3-fat,enable={{is_default_branch}}
+        type=raw,value=alpine-3.24.2-fat,enable={{is_default_branch}}
       build-args: |
-        BASE_TAG=3.23.3
+        BASE_TAG=3.24.2
