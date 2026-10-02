@@ -36,10 +36,10 @@ deploy:
 ## Building from Source
 
 ```bash
-docker buildx build --build-arg BASE_TAG=3.22.1 --platform linux/amd64 -t local/alpine-ssh-client .
+docker buildx build --build-arg BASE_TAG=3.24.2 --platform linux/amd64 -t local/alpine-ssh-client .
 
 # fat variant
-docker buildx build --build-arg BASE_TAG=3.22.1 --platform linux/amd64 -f Dockerfile.fat -t local/alpine-ssh-client:fat .
+docker buildx build --build-arg BASE_TAG=3.24.2 --platform linux/amd64 -f Dockerfile.fat -t local/alpine-ssh-client:fat .
 ```
 
 ## License
